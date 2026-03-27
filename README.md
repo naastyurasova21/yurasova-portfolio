@@ -19,7 +19,7 @@
 
 | Project | Stack | Description |
 |---------|-------|-------------|
-| [Contact Manager](./contact-manager/) | FastAPI, PostgreSQL, Docker, Nginx | Microservice web application for contact management. CRUD, filtering, reverse-proxy. |
+| [Contact Keeper](./contact-manager/) | FastAPI, PostgreSQL, Docker, Nginx | Microservice web application for contact management. CRUD, filtering, reverse-proxy. |
 | [Producer-Consumer](./producer-consumer/) | Python, threading | Multithreaded data processing system with thread-safe synchronization. |
 | [Named Pipes IPC](./named-pipes-ipc/) | Python, IPC, select() | Client-server communication via FIFO with finite state machines. |
 

@@ -31,7 +31,7 @@ The application consists of 4 containers:
 - Running application as non-root user
 - Nginx reverse-proxy hides internal service ports
 
-###Future improvments
+### Future improvments
 - Add unit tests
 - Implement user authentication
 - Rewrite frontend in React/Vue
