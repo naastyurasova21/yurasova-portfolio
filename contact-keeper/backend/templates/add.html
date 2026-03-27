@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление контакта{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 20px;">Добавление нового контакта</h1>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label>Фамилия *</label>
+            <input type="text" name="last_name" class="form-control" required 
+                   placeholder="Иванов">
+        </div>
+        
+        <div class="form-group">
+            <label>Имя *</label>
+            <input type="text" name="first_name" class="form-control" required 
+                   placeholder="Иван">
+        </div>
+        
+        <div class="form-group">
+            <label>Отчество</label>
+            <input type="text" name="middle_name" class="form-control" 
+                   placeholder="Иванович">
+        </div>
+        
+        <div class="form-group">
+            <label>Номер телефона *</label>
+            <input type="tel" name="phone_number" class="form-control" required 
+                   placeholder="+1 202 555 0147"
+                   inputmode="tel"
+                   autocomplete="tel">
+            <small style="color: var(--gray-color);">
+                Вводите международный номер с кодом страны. Например: +1 202 555 0147 или +44 20 7946 0958
+            </small>
+        </div>
+        
+        <div class="form-group">
+            <label>Группа</label>
+            <select name="contact_group" class="form-control">
+                {% for group in groups %}
+                    <option value="{{ group }}">{{ group }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Заметка</label>
+            <textarea name="note" class="form-control" rows="3" 
+                      placeholder="Дополнительная информация"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_favorite"> Добавить в избранное
+            </label>
+        </div>
+        
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="/" class="btn btn-danger">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

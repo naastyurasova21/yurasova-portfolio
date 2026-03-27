@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Просмотр контакта{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h1>
+            {{ contact.full_name }}
+            <form method="POST" action="/contact/{{ contact.id }}/favorite" style="display: inline;">
+                <button type="submit"
+                        class="favorite-toggle"
+                        title="{% if contact.is_favorite %}Убрать из избранного{% else %}Добавить в избранное{% endif %}">
+                    <span class="favorite-star {% if contact.is_favorite %}is-active{% else %}is-inactive{% endif %}">
+                        {% if contact.is_favorite %}★{% else %}☆{% endif %}
+                    </span>
+                </button>
+            </form>
+        </h1>
+        <div>
+            <a href="/contact/{{ contact.id }}/edit" class="btn btn-success">Редактировать</a>
+            <form method="POST" action="/contact/{{ contact.id }}/delete" style="display: inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить контакт?');">
+                    Удалить
+                </button>
+            </form>
+        </div>
+    </div>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 10px; background: #f5f5f5; width: 200px;"><strong>ФИО:</strong></td>
+            <td style="padding: 10px;">{{ contact.full_name }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; background: #f5f5f5;"><strong>Телефон:</strong></td>
+            <td style="padding: 10px;">{{ contact.formatted_phone }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; background: #f5f5f5;"><strong>Группа:</strong></td>
+            <td style="padding: 10px;">
+                <span class="group-tag" style="background: #e0e0e0;">{{ contact.contact_group }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; background: #f5f5f5;"><strong>Заметка:</strong></td>
+            <td style="padding: 10px;">{{ contact.note or '—' }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; background: #f5f5f5;"><strong>Создан:</strong></td>
+            <td style="padding: 10px;">{{ contact.created_at.strftime('%d.%m.%Y %H:%M') if contact.created_at else '—' }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; background: #f5f5f5;"><strong>Обновлён:</strong></td>
+            <td style="padding: 10px;">{{ contact.updated_at.strftime('%d.%m.%Y %H:%M') if contact.updated_at else '—' }}</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 20px;">
+        <a href="/" class="btn btn-primary">Вернуться к списку</a>
+    </div>
+</div>
+{% endblock %}

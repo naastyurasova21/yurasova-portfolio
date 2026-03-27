@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование контакта{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 20px;">Редактирование контакта</h1>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label>Фамилия *</label>
+            <input type="text" name="last_name" class="form-control" required 
+                   value="{{ contact.last_name }}">
+        </div>
+        
+        <div class="form-group">
+            <label>Имя *</label>
+            <input type="text" name="first_name" class="form-control" required 
+                   value="{{ contact.first_name }}">
+        </div>
+        
+        <div class="form-group">
+            <label>Отчество</label>
+            <input type="text" name="middle_name" class="form-control" 
+                   value="{{ contact.middle_name or '' }}">
+        </div>
+        
+        <div class="form-group">
+            <label>Номер телефона *</label>
+            <input type="tel" name="phone_number" class="form-control" required 
+                   value="{{ contact.formatted_phone }}"
+                   inputmode="tel"
+                   autocomplete="tel">
+            <small style="color: var(--gray-color);">
+                Вводите международный номер с кодом страны. Например: +1 202 555 0147 или +44 20 7946 0958
+            </small>
+        </div>
+        
+        <div class="form-group">
+            <label>Группа</label>
+            <select name="contact_group" class="form-control">
+                {% for group in groups %}
+                    <option value="{{ group }}" {% if group == contact.contact_group %}selected{% endif %}>
+                        {{ group }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Заметка</label>
+            <textarea name="note" class="form-control" rows="3"
+                      placeholder="Дополнительная информация">{{ contact.note or '' }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_favorite" {% if contact.is_favorite %}checked{% endif %}>
+                В избранном
+            </label>
+        </div>
+        
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-primary">Обновить</button>
+            <a href="/contact/{{ contact.id }}" class="btn btn-success">Просмотр</a>
+            <a href="/" class="btn btn-danger">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
